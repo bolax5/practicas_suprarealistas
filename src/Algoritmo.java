@@ -7,7 +7,7 @@ public class Algoritmo {
         sol[0] = true;
         int i = 0;
         for (int j = 1; j<c.length; j++){
-            if (c[j]>=f[i]){
+            if ((f[i]<= c[j])||(c[i]>=f[j])){
                 sol[j] = true;
                 i=j;
             }else{
