@@ -2,7 +2,7 @@
 public class Algoritmo {
 	
 	
-	/*En este caso, se espera un array de tiempos finales ordenados de mayor a menor,
+	/*En este caso, se espera un array de tiempos finales ordenados de menor a mayor,
 	 puesto que el criterio de selección va a ser orden creciente de fin.
 	 */
 	public boolean[] seleccionActividades(int[] c, int [] f)
