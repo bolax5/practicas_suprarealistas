@@ -41,5 +41,9 @@ public class Algoritmo {
         return sol;
     }
 
-
+	public boolean[] seleccionActividadesMejorado (int []c, int [] f){
+		boolean [] sol = new boolean [c.length];
+		int [] indices = new int [f.length];
+		return sol;
+	}
 }
