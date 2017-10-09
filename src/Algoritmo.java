@@ -16,7 +16,6 @@ public class Algoritmo {
         	/*Las actividades i y j son compatibles si la i es anterior a la j o viceversa.
         	 Es decir, el tiempo de finalización de la actividad i es menor o igual que el de comienzo de la j,
         	 o el tiempo de finalización de la actividad j es menor o igual que el de comienzo de la i.*/
-            
         	
             if ((f[i]<= c[j])|| (f[j]<= c[i])){ 
             	sol[j] = true;
@@ -41,9 +40,34 @@ public class Algoritmo {
         return sol;
     }
 
+
 	public boolean[] seleccionActividadesMejorado (int []c, int [] f){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
 		return sol;
 	}
+
+    public static void shell(int valores[]){
+        int salto, aux, i, z;
+        int indices[] = new int [valores.length];
+        for (z=0;z<indices.length;z++){
+            indices[z]=z;
+        }
+        boolean cambios;
+        for(salto=indices.length/2; salto!=0; salto/=2){
+            cambios=true;
+            while(cambios){ // Mientras se intercambie algún elemento
+                cambios=false;
+                for(i=salto; i< indices.length; i++){ // se da una pasada
+                    if(valores[indices[i-salto]]>valores[indices[i]]){ // y si están desordenados
+                            aux=indices[i]; // se reordenan
+                            indices[i]=indices[i-salto];
+                            indices[i-salto]=aux;
+                            cambios=true; // y se marca como cambio.
+                    }
+                }
+            }
+        }
+    }
 }
+    

@@ -8,7 +8,7 @@ public class Main {
 		 int [] fin2 = {11,8,3,20,24,25,24,29,28,21};
 		 Algoritmo alg = new Algoritmo();
 		 alg.seleccionActividades(com, fin);
-		 int [] a = {0-9};
+		 
 		 for (int i = 0; i<a.length; i++){
 			 System.out.println(a[i]);
 		 }
