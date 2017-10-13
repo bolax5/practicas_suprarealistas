@@ -9,7 +9,6 @@ public class Algoritmo {
     
     {
 boolean [] sol = new boolean [c.length];
-       
         sol[0] = true;
         int i = 0;
         for (int j = 1; j<c.length; j++){
@@ -26,13 +25,13 @@ boolean [] sol = new boolean [c.length];
                 sol[j] = false;
             }    
         }
-        
+       
         //Se imprime la solución en forma de array de booleanos.
         
         System.out.print("{");
         for (int k = 0; k<c.length; k++){
         	if(k == c.length-1){
-            System.out.print(sol[k]+ "}");
+            System.out.println(sol[k]+ "}");
         	}
         	else{
         		System.out.print(sol[k] + ",");
@@ -46,16 +45,21 @@ boolean [] sol = new boolean [c.length];
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
 		indices = shell(f);
-		sol[0] = true;
+		
+		
+		sol[indices[0]] = true;
+		System.out.println(indices[0] + ": TRUE");
 		int i=0;
 		for (int j = 1; j<c.length; j++){
         	
             if ((c[indices[i]]>= f[indices[j]])|| (c[indices[j]]>= f[indices[i]])){ 
-            	sol[j] = true;
+            	sol[indices[j]] = true;
+            	System.out.println(indices[j] + " : TRUE");
                 i=j;
             }
             else{
-                sol[j] = false;
+                sol[indices[j]]= false;
+                System.out.println(indices[j] +": FALSE");
             }    
         }
 		return sol;
