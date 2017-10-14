@@ -1,14 +1,17 @@
 
 public class Algoritmo {
-	
+	/**
+	 * 
+	 * @param c Un array de comienzos
+	 * @param f Un array de tiempos de fin ordenados de menor a mayor
+	 * @return Un array de booleanos. La actividad i es TRUE si ha sido seleccionada, FALSE en caso contrario.
+	 */
 	
 	/*En este caso, se espera un array de tiempos finales ordenados de menor a mayor,
 	 puesto que el criterio de selección va a ser orden creciente de fin.
 	 */
-	public boolean[] seleccionActividades(int[] c, int [] f)
-    
-    {
-boolean [] sol = new boolean [c.length];
+	public boolean[] seleccionActividades(int[] c, int [] f){
+		boolean [] sol = new boolean [c.length];
         sol[0] = true;
         int i = 0;
         for (int j = 1; j<c.length; j++){
@@ -28,46 +31,50 @@ boolean [] sol = new boolean [c.length];
        
         //Se imprime la solución en forma de array de booleanos.
         
-        System.out.print("{");
-        for (int k = 0; k<c.length; k++){
-        	if(k == c.length-1){
-            System.out.println(sol[k]+ "}");
-        	}
-        	else{
-        		System.out.print(sol[k] + ",");
-        	}
-        }
+        ImprimirSolucion("La solución para el primer ejercicio es: ", sol);
         return sol;
     }
 
-
+	/**
+	 * 
+	 * @param c Un array de tiempos de comienzo
+	 * @param f Un array de tiempos de fin
+	 * @return  Un array de booleanos. La actividad i es TRUE si ha sido seleccionada, FALSE en caso contrario.
+	 */
 	public boolean[] seleccionActividadesMejorado (int []c, int [] f){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
+		
+		/*Este array de indices contiene el número de orden que le corresponde a cada actividad*/
+		
 		indices = shell(f);
-		
-		
 		sol[indices[0]] = true;
-		System.out.println(indices[0] + ": TRUE");
 		int i=0;
 		for (int j = 1; j<c.length; j++){
         	
-            if ((c[indices[i]]>= f[indices[j]])|| (c[indices[j]]>= f[indices[i]])){ 
+			
+			/*En este apartado como las actividades no están ordenadas de ninguna forma hay que tener en
+        	  cuenta el correspondiente índice de cada actividad, bien sea para comparar o para marcarla como
+        	  válida o no.
+        	 */
+            if (c[indices[i]]>= f[indices[j]] || c[indices[j]]>= f[indices[i]]){ 
             	sol[indices[j]] = true;
-            	System.out.println(indices[j] + " : TRUE");
                 i=j;
             }
             else{
                 sol[indices[j]]= false;
-                System.out.println(indices[j] +": FALSE");
             }    
         }
+		ImprimirSolucion("\nLa solución para el segundo ejercicio es:", sol);
 		return sol;
+		
 	}
+	
 	/** En este método 
 	 * @params: Un array de valores
 	 * @return : Un array de índices ordenados con respecto al array introducido */
-    private  int [] shell (int valores[]){
+    
+	private  int [] shell (int valores[]){
         int salto, aux, i, z;
         int indices[] = new int [valores.length];
         for (z=0;z<indices.length;z++){
@@ -90,6 +97,19 @@ boolean [] sol = new boolean [c.length];
         }
         return indices;
     }
- 
+    
+	/* Método privado para imprimir por pantalla la solución */
+    private void ImprimirSolucion (String s, boolean [] sol){
+    	System.out.println(s);
+    	System.out.print("{");
+        for (int k = 0; k<sol.length; k++){
+        	if(k == sol.length-1){
+            System.out.println(sol[k]+ "}");
+        	}
+        	else{
+        		System.out.print(sol[k] + ",");
+        	}
+        }	
+    }
 }
     
