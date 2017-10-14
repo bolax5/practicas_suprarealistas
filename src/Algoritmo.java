@@ -1,5 +1,6 @@
 
 public class Algoritmo {
+	
 	/**
 	 * 
 	 * @param c Un array de comienzos
@@ -65,6 +66,7 @@ public class Algoritmo {
                 sol[indices[j]]= false;
             }    
         }
+		
 		ImprimirSolucion("\nLa solución para el segundo ejercicio es:", sol);
 		return sol;
 		
