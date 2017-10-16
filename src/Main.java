@@ -8,9 +8,10 @@ public class Main {
 		 Algoritmo alg = new Algoritmo();
 		 alg.seleccionActividades(com, fin);
 		 
-		int [] a = {8,29,21,11,3,25,24,18,20,24};
+		int [] a = {8,29,21,11,7,25,24,18,20,24};
 		int [] com2 = {7,24,11,5,0,12,23,2,16,15};
 		alg.seleccionActividadesMejorado(com2, a);
+		alg.seleccionActividadesSinOrden(com2,a );
 	}
 
 }

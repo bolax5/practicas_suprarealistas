@@ -71,6 +71,41 @@ public class Algoritmo {
 		return sol;
 		
 	}
+	public boolean[] seleccionActividadesSinOrden(int [] c, int [] f){
+		boolean sol [] = new boolean [c.length];
+		int tiempoMenor = f[0];
+		
+		int indice = 0;
+		for (int i = 1; i < c.length; i++){
+			if (f[i]<tiempoMenor){
+				tiempoMenor = c[i];
+				indice = i;
+			}
+			tiempoMenor = f[indice];	
+		}
+		sol[indice] = true;
+		int tiempoAnterior;
+		int cont = 0;
+		while(cont<c.length-1){
+		tiempoAnterior=tiempoMenor;
+		tiempoMenor++;
+		for (int i = 0; i<c.length; i++){
+			if ((f[i]>tiempoAnterior) && (f[i]<= tiempoMenor)){
+				tiempoMenor = f[i];
+				indice = i;
+				sol[indice] = true;
+			}
+		}
+		
+		
+		cont++;
+		}
+		System.out.println(tiempoMenor);
+		System.out.println(indice);
+		ImprimirSolucion("Tercera solucion" ,sol);
+		return sol;
+		
+	}
 	
 	/** En este método 
 	 * @params: Un array de valores
@@ -113,5 +148,6 @@ public class Algoritmo {
         	}
         }	
     }
+
 }
     
