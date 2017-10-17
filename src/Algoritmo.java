@@ -112,6 +112,37 @@ public class Algoritmo {
         		System.out.print(sol[k] + ",");
         	}
         }	
+	}
+	
+	public boolean[] seleccionActividades2(int[] c, int [] f){
+		boolean [] sol = new boolean [c.length];
+        
+		int i;
+		int min = 0;
+		for (i = 0;i<c.length; i++){
+			if (f[min]>f[i])
+				min = i;
+		}
+		sol[min] = true;
+		boolean solucion = true;
+
+		while (solucion){
+			solucion = false;
+			for ( i = 0; i<c.length; i++){
+				if ((f[i]>f[min]) && c[i]>= f[min]){ 
+					sol[i] = true;
+					min = i;
+					solucion = true;
+				} 
+			}
+		}
+        
+       
+        //Se imprime la solución en forma de array de booleanos.
+        
+        ImprimirSolucion("La solución para el primer ejercicio es: ", sol);
+        return sol;
     }
+	
 }
     
