@@ -71,6 +71,51 @@ public class Algoritmo {
 		return sol;
 		
 	}
+	public boolean[] seleccionActividadesSinOrden(int [] c, int [] f){
+		boolean sol [] = new boolean [c.length];
+		int tiempoMenor = f[0];
+		int tiempoMaximo = f[0];
+		int indice = 0;
+		for (int i = 1; i < c.length; i++){
+			if (f[i]<tiempoMenor){
+				tiempoMenor = f[i];
+				indice = i;
+			}
+			if (f[i]>tiempoMaximo){
+				tiempoMaximo = f[i];
+			}	
+		}
+		sol[indice] = true;
+		int tiempoAnterior;
+		int cont = 0;
+		tiempoAnterior=tiempoMenor;
+		tiempoMenor=tiempoMaximo;
+		int indiceNuevo = 0;
+		while(cont<c.length){
+		for (int i = 0; i<c.length; i++){
+			if (sol[i]==true){
+				continue;
+			}
+			if ((f[i]>tiempoAnterior) && (f[i]<= tiempoMenor)){
+				tiempoMenor = f[i];
+				indiceNuevo = i;
+			}
+			
+		}
+		if((c[indice] >= f[indiceNuevo])||(c[indiceNuevo]>=f[indice])){
+			sol[indiceNuevo] = true;
+			indice= indiceNuevo;
+		}
+		
+		tiempoAnterior= tiempoMenor;
+		tiempoMenor = tiempoMaximo;
+		cont++;
+		}
+		
+		ImprimirSolucion("Tercera solucion" ,sol);
+		return sol;
+		
+	}
 	
 	/** En este método 
 	 * @params: Un array de valores
