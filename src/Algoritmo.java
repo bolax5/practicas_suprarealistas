@@ -158,8 +158,8 @@ public class Algoritmo {
         	}
         }	
 	}
-	
-	public boolean[] seleccionActividades2(int[] c, int [] f){
+	// Este es el mio, dale un chance a ver que tal se comporta, si funciona tambien, tenemos mas variantes para el informe
+	public boolean[] seleccionActividadesmejora2(int[] c, int [] f){
 		boolean [] sol = new boolean [c.length];
         
 		int i;
