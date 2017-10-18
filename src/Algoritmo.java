@@ -11,9 +11,10 @@ public class Algoritmo {
 	/*En este caso, se espera un array de tiempos finales ordenados de menor a mayor,
 	 puesto que el criterio de selección va a ser orden creciente de fin.
 	 */
-	public boolean[] seleccionActividades(int[] c, int [] f){
+	public int seleccionActividades(int[] c, int [] f){
 		boolean [] sol = new boolean [c.length];
         sol[0] = true;
+        int numActividades = 1;
         int i = 0;
         for (int j = 1; j<c.length; j++){
         	
@@ -24,6 +25,7 @@ public class Algoritmo {
             if (c[i]>=f[j] || c[j]>= f[i]){ 
             	sol[j] = true;
                 i=j;
+                numActividades++;
             }
             else{
                 sol[j] = false;
@@ -32,8 +34,8 @@ public class Algoritmo {
        
         //Se imprime la solución en forma de array de booleanos.
         
-        ImprimirSolucion("La solución para el primer ejercicio es: ", sol);
-        return sol;
+        ImprimirSolucion("La solución para el primer método es: ", sol);
+        return numActividades;
     }
 
 	/**
@@ -42,9 +44,10 @@ public class Algoritmo {
 	 * @param f Un array de tiempos de fin
 	 * @return  Un array de booleanos. La actividad i es TRUE si ha sido seleccionada, FALSE en caso contrario.
 	 */
-	public boolean[] seleccionActividadesMejorado (int []c, int [] f){
+	public int seleccionActividadesMejorado (int []c, int [] f){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
+		int numActividades = 1;
 		
 		/*Este array de indices contiene el número de orden que le corresponde a cada actividad*/
 		
@@ -61,61 +64,18 @@ public class Algoritmo {
             if (c[indices[i]]>= f[indices[j]] || c[indices[j]]>= f[indices[i]]){ 
             	sol[indices[j]] = true;
                 i=j;
+                numActividades++;
             }
             else{
                 sol[indices[j]]= false;
             }    
         }
 		
-		ImprimirSolucion("\nLa solución para el segundo ejercicio es:", sol);
-		return sol;
+		ImprimirSolucion("\nLa solución para el segundo método es:", sol);
+		return numActividades;
 		
 	}
-	public boolean[] seleccionActividadesSinOrden(int [] c, int [] f){
-		boolean sol [] = new boolean [c.length];
-		int tiempoMenor = f[0];
-		int tiempoMaximo = f[0];
-		int indice = 0;
-		for (int i = 1; i < c.length; i++){
-			if (f[i]<tiempoMenor){
-				tiempoMenor = f[i];
-				indice = i;
-			}
-			if (f[i]>tiempoMaximo){
-				tiempoMaximo = f[i];
-			}	
-		}
-		sol[indice] = true;
-		int tiempoAnterior;
-		int cont = 0;
-		tiempoAnterior=tiempoMenor;
-		tiempoMenor=tiempoMaximo;
-		int indiceNuevo = 0;
-		while(cont<c.length){
-		for (int i = 0; i<c.length; i++){
-			if (sol[i]==true){
-				continue;
-			}
-			if ((f[i]>tiempoAnterior) && (f[i]<= tiempoMenor)){
-				tiempoMenor = f[i];
-				indiceNuevo = i;
-			}
-			
-		}
-		if((c[indice] >= f[indiceNuevo])||(c[indiceNuevo]>=f[indice])){
-			sol[indiceNuevo] = true;
-			indice= indiceNuevo;
-		}
-		
-		tiempoAnterior= tiempoMenor;
-		tiempoMenor = tiempoMaximo;
-		cont++;
-		}
-		
-		ImprimirSolucion("Tercera solucion" ,sol);
-		return sol;
-		
-	}
+
 	
 	/** En este método 
 	 * @params: Un array de valores
@@ -158,10 +118,15 @@ public class Algoritmo {
         	}
         }	
 	}
-	// Este es el mio, dale un chance a ver que tal se comporta, si funciona tambien, tenemos mas variantes para el informe
-	public boolean[] seleccionActividadesmejora2(int[] c, int [] f){
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @return 
+	 */
+	public int seleccionActividadesSinOrden(int[] c, int [] f){
 		boolean [] sol = new boolean [c.length];
-        
+        int numActividades =1;
 		int i;
 		int min = 0;
 		for (i = 0;i<c.length; i++){
@@ -170,24 +135,47 @@ public class Algoritmo {
 		}
 		sol[min] = true;
 		boolean solucion = true;
-
+		int minAux = min;
 		while (solucion){
 			solucion = false;
-			for ( i = 0; i<c.length; i++){
-				if ((f[i]>f[min]) && c[i]>= f[min]){ 
-					sol[i] = true;
-					min = i;
-					solucion = true;
-				} 
+			for (i = 0; i<c.length; i++){
+				
+				/*Se comprueba si es el siguiente fin, si lo es, se comprueba que sea compatible.
+				Si no, hay que buscar un nuevo mínimo y empezar de nuevo el bucle*/
+				if (esMinimo(f[minAux],f[i],f)){ 
+					if(c[i]>= f[min]){
+						sol[i] = true;
+						min = i;
+						solucion = true;
+						numActividades++;
+						break;
+						
+					}	
+					else{
+						minAux = i;
+						i=-1;
+					}
+				}
 			}
 		}
         
        
         //Se imprime la solución en forma de array de booleanos.
         
-        ImprimirSolucion("La solución para el primer ejercicio es: ", sol);
-        return sol;
+        ImprimirSolucion("La solución para el tercer método es: ", sol);
+        return numActividades;
     }
-	
+	/*Este método devuelve TRUE si candidato es justo el tiempo siguiente más pequeño en orden
+	 * del array, FALSE en otro caso */
+	 
+	private boolean esMinimo (int antiguoMenor, int candidato, int [] array){
+		int menor = Integer.MAX_VALUE;
+		for (int i = 0; i<array.length; i++){
+			if ((array[i]>antiguoMenor) && (array[i]<=menor )){
+				menor = array[i];
+			}
+		}
+		return menor == candidato;
+	}
 }
     
