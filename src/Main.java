@@ -14,9 +14,7 @@ public class Main {
 		int [] com2 = {7,24,11,5,0,12,23,2,16,15};
 		y =alg.seleccionActividadesMejorado(com2, fin2);
 		z = alg.seleccionActividadesSinOrden(com2,fin2 );
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(z);
+		
 	}
 
 }
