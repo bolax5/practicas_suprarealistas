@@ -22,7 +22,7 @@ public class Algoritmo {
         	 Es decir, el tiempo de finalización de la actividad i es menor o igual que el de comienzo de la j,
         	 o el tiempo de finalización de la actividad j es menor o igual que el de comienzo de la i.*/
         	
-            if (c[i]>=f[j] || c[j]>= f[i]){ 
+            if ( c[j]>= f[i]||c[i]>=f[j]){ 
             	sol[j] = true;
                 i=j;
                 numActividades++;
