@@ -81,7 +81,7 @@ public class Algoritmo {
 	 * @params: Un array de valores
 	 * @return : Un array de índices ordenados con respecto al array introducido */
     
-	private  int [] shell (int valores[]){
+	public  int [] shell (int valores[]){
         int salto, aux, i, z;
         int indices[] = new int [valores.length];
         for (z=0;z<indices.length;z++){
