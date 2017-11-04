@@ -21,7 +21,8 @@ public class Main {
 	 	alg.seleccionActividadesPonderadoVoraz2(com2, fin2, ben2);
 		alg.seleccionActividadesPonderada(com2, fin2, ben2);
 		alg.seleccionActividadesPonderada2(com2, fin2, ben2);
-		
+		alg.seleccionActividadesPonderada3(com2, fin2, ben2);
+		alg.seleccionActividadesPonderada4(com2, fin2, ben2);
 	}
 
 }

@@ -1,5 +1,3 @@
-     import java.util.Arrays;
-
 public class AlgoritmoAproximado {
 	public int seleccionActividadesPonderadoVoraz (int [] c, int [] f, int [] b){
 		
@@ -28,7 +26,8 @@ public class AlgoritmoAproximado {
             		ben += b[indices[j]];
         }
 
-		ImprimirSolucion("\nLa solución para el algoritmo voraz con función de selección de coger el mayor beneficio es:", sol);
+		ImprimirSolucion("La solución para el algoritmo voraz con función de selección de coger el mayor beneficio es:", sol);
+		System.out.println("El beneficio es : " + ben);
 		return ben;
 	}
 	public int seleccionActividadesPonderadoVoraz2 (int []c, int [] f, int [] b){
@@ -58,6 +57,7 @@ public class AlgoritmoAproximado {
                 ben += b[indices[j]];
             }
 		ImprimirSolucion("\nLa solución para el algoritmo voraz con función de selección de coger la mayor tasa beneficio/duracion es:", sol);
+		System.out.println("El beneficio es : " +ben);
 		return ben;
 	}
 
@@ -67,19 +67,80 @@ public class AlgoritmoAproximado {
 		indices = shell(b);
 		
 		int beneficio = 0;
-		for (int i= 0; i<b.length/2; i++){
-			beneficio += b[indices[i]];
-			sol[i] = true;
+		int i = 0;
+		beneficio += b[indices[i]];
+		sol[indices[i]] = true;
+		for (int j= 1; j<f.length; j++){
+			if(c[indices[j]]>=f[indices[i]]){
+				beneficio += b[indices[j]];
+				sol[indices[j]] = true;
+				i=j;
+			}
+			
+			
 		}
-		ImprimirSolucion("Hey ", sol);
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la primera funcion de seleccion es: ", sol);
 		System.out.println("El beneficio es "+ beneficio);
 		return beneficio;
 	}
 	
-	
-	
-	public int seleccionActividadesPonderada2(int [] c, int [] f , int [] b){
+	public int seleccionActividadesPonderada2(int []c, int [] f, int [] b){
 		boolean [] sol = new boolean [c.length];
+		int [] indices = new int [f.length];
+		double [] tasas = new double [b.length];
+		
+		for (int i = 0; i<tasas.length; i++){
+			tasas[i] = (double) b[i]/ (double)(f[i]-c[i]);
+		}
+		
+		/*Este array de indices contiene el número de orden que le corresponde a cada actividad*/
+		
+		indices = shell(tasas);
+		int i = 0;
+		sol[indices[i]] = true;
+		int beneficio = b[indices[i]];
+		for (int j = 1; j<f.length; j++){
+			if(c[indices[j]]>=f[indices[i]]){
+				beneficio += b[indices[j]];
+				sol[indices[j]] = true;
+				i=j;
+			}
+		}
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la segunda funcion de seleccion es:",sol);
+		System.out.println("El beneficio es : "+ beneficio);
+		return beneficio;
+	}
+	
+	public int seleccionActividadesPonderada3(int [] c, int [] f , int [] b){
+		boolean [] sol = new boolean [c.length];
+		int [] indices = new int [f.length];
+		int media = 0;
+		for (int i = 0; i<b.length; i++){
+			media = media + b[i];
+		}
+		media = media/b.length;
+		indices = shell(b);
+		int beneficio = 0;
+		for (int i = 0; i<b.length; i++){
+			if (beneficio + b[indices[i]]<= media){
+				beneficio += b[indices[i]];
+				sol[indices[i]] = true;
+			}
+		
+		}
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de seleccion es:",sol);
+		System.out.println("El beneficio es : "+ beneficio);
+		return beneficio;
+	}
+	public int seleccionActividadesPonderada4(int [] c,int [] f, int [] b){
+		boolean [] sol = new boolean [c.length];
+		int [] indices = new int [f.length];
+		double [] tasas = new double [b.length];
+		
+		for (int i = 0; i<tasas.length; i++){
+			tasas[i] = (double) b[i]/ (double)(f[i]-c[i]);
+		}
+		indices = shell(tasas);
 		int media = 0;
 		for (int i = 0; i<b.length; i++){
 			media = media + b[i];
@@ -87,18 +148,15 @@ public class AlgoritmoAproximado {
 		media = media/b.length;
 		int beneficio = 0;
 		for (int i = 0; i<b.length; i++){
-			if (beneficio + b[i]<= media){
-				beneficio += b[i];
-				sol[i] = true;
+			if (beneficio + b[indices[i]]<= media){
+				beneficio += b[indices[i]];
+				sol[indices[i]] = true;
 			}
-		
 		}
-		ImprimirSolucion("Hola:",sol);
-		System.out.println("El beneficio es "+ beneficio);
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de seleccion es:",sol);
+		System.out.println("El beneficio es : " + beneficio);
 		return beneficio;
 	}
-	
-	
 	//Se implementa este método para que admita un array de double.
 	
 	/** En este método 
