@@ -1,37 +1,35 @@
-import java.util.Arrays;
+     import java.util.Arrays;
 
 public class AlgoritmoAproximado {
 	public int seleccionActividadesPonderadoVoraz (int [] c, int [] f, int [] b){
 		
 		boolean [] sol = new boolean [c.length];
-		int [] indices = new int [f.length];
-		
-		int numActividades = 1;
-		
-		/*Este array de indices contiene el número de orden que le corresponde a cada actividad*/
+		int [] indices = new int [f.length]; 
+
+		/*Este array de indices contiene el número de orden que le corresponde a cada actividad
+		 con respecto a su beneficio.*/
 		
 		indices = shell(b);
-		int i = b.length-1;
+		int i = 0;
 		sol[indices[i]] = true;
-		for (int j = b.length-2; j>=0; j--){
+		int ben = b[indices[i]];
+		
+		for (int j = 1 ;j<b.length; j++){
 			
 			/*En este apartado como las actividades no están ordenadas de ninguna forma hay que tener en
         	  cuenta el correspondiente índice de cada actividad, bien sea para comparar o para marcarla como
-        	  válida o no.
+        	  válida o no.Además en este algoritmo al haberse incluido la maximizacion de beneficio, es necesario
+        	  comprobar cada actividad con el resto, puesto que hay que saber si es compatible no solo con respecto
+        	  a la anterior si no con todas.
         	 */
-            if ((c[indices[i]]>= f[indices[j]] || c[indices[j]]>= f[indices[i]])&&f[indices[j]] != -1){
-            	
-            	sol[indices[j]] = true;
-                numActividades++;
-            }
-            else{
-                sol[indices[j]]= false;
-                f[indices[j]] = -1;
-            }    
+			
+            	sol[indices[j]] = esCompatible(c,f,sol,indices[j]);
+            	if (sol[indices[j]])
+            		ben += b[indices[j]];
         }
-		
-		ImprimirSolucion("\nLa solución para el primer método es:", sol);
-		return numActividades;
+
+		ImprimirSolucion("\nLa solución para el algoritmo voraz con función de selección de coger el mayor beneficio es:", sol);
+		return ben;
 	}
 	public int seleccionActividadesPonderadoVoraz2 (int []c, int [] f, int [] b){
 		boolean [] sol = new boolean [c.length];
@@ -41,34 +39,26 @@ public class AlgoritmoAproximado {
 		for (int i = 0; i<tasas.length; i++){
 			tasas[i] = (double) b[i]/ (double)(f[i]-c[i]);
 		}
-		int numActividades = 1;
 		
 		/*Este array de indices contiene el número de orden que le corresponde a cada actividad*/
 		
 		indices = shell(tasas);
-		int i = b.length-1;
+		int i = 0;
 		sol[indices[i]] = true;
-		for (int j = b.length-2; j>=0; j--){
+		int ben = b[indices[i]];
+		for (int j = 1; j<b.length; j++){
 			
 			/*En este apartado como las actividades no están ordenadas de ninguna forma hay que tener en
         	  cuenta el correspondiente índice de cada actividad, bien sea para comparar o para marcarla como
         	  válida o no.
         	 */
-            if ((c[indices[i]]>= f[indices[j]] || c[indices[j]]>= f[indices[i]])&&(f[indices[j]]!=-1)){ 
-            	i=j;
-            	sol[indices[j]] = true;
-                numActividades++;
+			
+            	sol[indices[j]] = esCompatible(c,f,sol,indices[j]);
+            	if(sol[indices[j]])
+                ben += b[indices[j]];
             }
-            else{
-            	f[indices[j]] = -1;
-                sol[indices[j]]= false;
-               
-             }    
-        }
-		
-		
-		ImprimirSolucion("\nLa solución para el segundo método es:", sol);
-		return numActividades;
+		ImprimirSolucion("\nLa solución para el algoritmo voraz con función de selección de coger la mayor tasa beneficio/duracion es:", sol);
+		return ben;
 	}
 
 	public int seleccionActividadesPonderada(int [] c, int [] f, int [] b){
@@ -77,9 +67,12 @@ public class AlgoritmoAproximado {
 		indices = shell(b);
 		
 		int beneficio = 0;
-		for (int i= b.length-1; i>=b.length/2; i--){
+		for (int i= 0; i<b.length/2; i++){
 			beneficio += b[indices[i]];
+			sol[i] = true;
 		}
+		ImprimirSolucion("Hey ", sol);
+		System.out.println("El beneficio es "+ beneficio);
 		return beneficio;
 	}
 	
@@ -92,7 +85,6 @@ public class AlgoritmoAproximado {
 			media = media + b[i];
 		}
 		media = media/b.length;
-		System.out.println(media);
 		int beneficio = 0;
 		for (int i = 0; i<b.length; i++){
 			if (beneficio + b[i]<= media){
@@ -102,16 +94,19 @@ public class AlgoritmoAproximado {
 		
 		}
 		ImprimirSolucion("Hola:",sol);
+		System.out.println("El beneficio es "+ beneficio);
 		return beneficio;
 	}
 	
 	
+	//Se implementa este método para que admita un array de double.
 	
 	/** En este método 
 	 * @params: Un array de valores
 	 * @return : Un array de índices ordenados con respecto al array introducido */
     
-	public  int [] shell (double valores[]){
+	
+	private  int [] shell (double valores[]){
         int salto, aux, i, z;
         int indices[] = new int [valores.length];
         for (z=0;z<indices.length;z++){
@@ -123,7 +118,7 @@ public class AlgoritmoAproximado {
             while(cambios){ // Mientras se intercambie algún elemento
                 cambios=false;
                 for(i=salto; i< indices.length; i++) // se da una pasada
-                    if(valores[indices[i-salto]]>valores[indices[i]]){ // y si están desordenados
+                    if(valores[indices[i-salto]]<valores[indices[i]]){ // y si están desordenados
                             aux=indices[i]; // se reordenan
                             indices[i]=indices[i-salto];
                             indices[i-salto]=aux;
@@ -134,7 +129,7 @@ public class AlgoritmoAproximado {
         }
         return indices;
     }
-	public  int [] shell (int valores[]){
+	private  int [] shell (int valores[]){
         int salto, aux, i, z;
         int indices[] = new int [valores.length];
         for (z=0;z<indices.length;z++){
@@ -146,7 +141,7 @@ public class AlgoritmoAproximado {
             while(cambios){ // Mientras se intercambie algún elemento
                 cambios=false;
                 for(i=salto; i< indices.length; i++) // se da una pasada
-                    if(valores[indices[i-salto]]>valores[indices[i]]){ // y si están desordenados
+                    if(valores[indices[i-salto]]<valores[indices[i]]){ // y si están desordenados
                             aux=indices[i]; // se reordenan
                             indices[i]=indices[i-salto];
                             indices[i-salto]=aux;
@@ -170,4 +165,23 @@ public class AlgoritmoAproximado {
         	}
         }	
 	}
+    /**
+     * Este método compara una actividad candidata con el resto de actividades seleccionadas,
+     * para comprobar si es compatible con todas.
+     * @param c .Array de tiempos de comienzo.
+     * @param f	.Array de tiempos de fin.
+     * @param sol .Array de solucion.
+     * @param act .Actividad a comparar.
+     * @return
+     */
+    private boolean esCompatible(int [] c, int [] f, boolean[] sol, int act){
+    	for (int i = 0; i<sol.length;i++){
+    		if(sol[i]==true){
+    			if (!(c[act]>= f[i])&& !(c[i]>=f[act])){
+    				return false;
+    			}
+    		}
+    	}
+    	return true;
+    }
 }
