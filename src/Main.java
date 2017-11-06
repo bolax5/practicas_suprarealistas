@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 
 public class Main {
 
@@ -6,10 +6,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int x,y,z,t;
-		AlgoritmoAproximado alg = new AlgoritmoAproximado();
 
-		
+		AlgoritmoAproximado alg = new AlgoritmoAproximado();
 		int [] com2 = {0,2,4,1,7,6};
 		int [] fin2 = {3,7,6,5,9,8};
 		int [] ben2 = {2,7,4,4,2,2};
