@@ -79,7 +79,7 @@ public class AlgoritmoAproximado {
 			
 			
 		}
-		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la primera funcion de seleccion es: ", sol);
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la primera funcion de aproximacion es: ", sol);
 		System.out.println("El beneficio es "+ beneficio);
 		return beneficio;
 	}
@@ -106,7 +106,7 @@ public class AlgoritmoAproximado {
 				i=j;
 			}
 		}
-		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la segunda funcion de seleccion es:",sol);
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la segunda funcion de aproximacion es:",sol);
 		System.out.println("El beneficio es : "+ beneficio);
 		return beneficio;
 	}
@@ -153,7 +153,7 @@ public class AlgoritmoAproximado {
 				sol[indices[i]] = true;
 			}
 		}
-		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de seleccion es:",sol);
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la cuarta funcion de aproximacion es:",sol);
 		System.out.println("El beneficio es : " + beneficio);
 		return beneficio;
 	}
