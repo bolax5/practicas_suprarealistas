@@ -71,6 +71,10 @@ public class AlgoritmoAproximado {
 		beneficio += b[indices[i]];
 		sol[indices[i]] = true;
 		for (int j= 1; j<f.length; j++){
+			
+			/*Esta condicion es la que cambia con respecto al correspondiente voraz. Solo se escogen aquellas
+			que empiecen despues de que haya acabado la anterior seleccionada.*/
+			
 			if(c[indices[j]]>=f[indices[i]]){
 				beneficio += b[indices[j]];
 				sol[indices[j]] = true;
@@ -93,13 +97,16 @@ public class AlgoritmoAproximado {
 			tasas[i] = (double) b[i]/ (double)(f[i]-c[i]);
 		}
 		
-		/*Este array de indices contiene el número de orden que le corresponde a cada actividad*/
+		
 		
 		indices = shell(tasas);
 		int i = 0;
 		sol[indices[i]] = true;
 		int beneficio = b[indices[i]];
 		for (int j = 1; j<f.length; j++){
+			
+			/*Esta condicion es la que cambia con respecto al correspondiente voraz. Solo se escogen aquellas
+			que empiecen despues de que haya acabado la anterior seleccionada.*/
 			if(c[indices[j]]>=f[indices[i]]){
 				beneficio += b[indices[j]];
 				sol[indices[j]] = true;
@@ -122,13 +129,17 @@ public class AlgoritmoAproximado {
 		indices = shell(b);
 		int beneficio = 0;
 		for (int i = 0; i<b.length; i++){
+			
+			/* En este caso se comprueba que el beneficio de la actividad candidata, sumado al acumulado
+			  no supere la media de beneficios. Si es así se marca como solución*/
+			 
 			if (beneficio + b[indices[i]]<= media){
 				beneficio += b[indices[i]];
 				sol[indices[i]] = true;
 			}
 		
 		}
-		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de seleccion es:",sol);
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de aproximacion es:",sol);
 		System.out.println("El beneficio es : "+ beneficio);
 		return beneficio;
 	}
@@ -148,12 +159,20 @@ public class AlgoritmoAproximado {
 		media = media/b.length;
 		int beneficio = 0;
 		for (int i = 0; i<b.length; i++){
+			
+			/* En este caso se comprueba que el beneficio de la actividad candidata, sumado al acumulado
+			  no supere la media de beneficios. Si es así se marca como solución*/
+			
 			if (beneficio + b[indices[i]]<= media){
 				beneficio += b[indices[i]];
 				sol[indices[i]] = true;
 			}
 		}
+<<<<<<< HEAD
 		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la cuarta funcion de aproximacion es:",sol);
+=======
+		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de aproximacion es:",sol);
+>>>>>>> devJorge
 		System.out.println("El beneficio es : " + beneficio);
 		return beneficio;
 	}
