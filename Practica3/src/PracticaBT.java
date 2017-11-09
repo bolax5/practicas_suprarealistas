@@ -11,24 +11,23 @@ public class PracticaBT {
 			for (int i = 0; i < escogidos.length; i++) {
 				if(!escogidos[i]){
 					escogidos[i] = true;
-					algoritmoBTRecur(sol,sol_parcial,escogidos,0,i,N,D);
+					algoritmoBTRecur(sol_parcial,escogidos,0,i,N,D);
 					escogidos[i] = false;
 				}
 			}
 		
 		return sol;
 	}
-	public void algoritmoBTRecur(int [] solu, int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
+	public void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
 		sol_parcial[etapa] = componente;
 		if(etapa==sol_parcial.length-1){
 			//Soy una hoja
 			int x = calcularCable(sol_parcial, N, D);
 			if(x < longitud){
-				solu= sol_parcial;
-				for (int i = 0; i < solu.length; i++) {
-					System.out.print(solu[i] + ", ");
-					
-				}
+				for (int i = 0; i < D.length; i++) {
+					sol[i]=sol_parcial[i];
+				};
+				
 				longitud = x;
 			}
 		}
@@ -36,7 +35,7 @@ public class PracticaBT {
 			for (int i = 0; i < escogidos.length; i++) {
 				if(!escogidos[i]){
 					escogidos[i] = true;
-					algoritmoBTRecur(solu,sol_parcial,escogidos,etapa+1,i,N,D);
+					algoritmoBTRecur(sol_parcial,escogidos,etapa+1,i,N,D);
 					escogidos[i] = false;
 				}
 			}

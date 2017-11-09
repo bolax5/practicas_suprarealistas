@@ -1,4 +1,14 @@
+import java.util.Random;
+
 public class AlgoritmoAproximado {
+	
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @param b : Un array de beneficios sin ordenar
+	 * @return El beneficio obtenido.Además, imprime por pantalla, el array de soluciones y el beneficio
+	 */
 	public int seleccionActividadesPonderadoVoraz (int [] c, int [] f, int [] b){
 		
 		boolean [] sol = new boolean [c.length];
@@ -30,6 +40,14 @@ public class AlgoritmoAproximado {
 		System.out.println("El beneficio es : " + ben);
 		return ben;
 	}
+	
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @param b : Un array de beneficios sin ordenar
+	 * @return El beneficio obtenido.Además, imprime por pantalla, el array de soluciones y el beneficio
+	 */
 	public int seleccionActividadesPonderadoVoraz2 (int []c, int [] f, int [] b){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
@@ -60,7 +78,14 @@ public class AlgoritmoAproximado {
 		System.out.println("El beneficio es : " +ben);
 		return ben;
 	}
-
+	
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @param b : Un array de beneficios sin ordenar
+	 * @return El beneficio obtenido.Además, imprime por pantalla, el array de soluciones y el beneficio
+	 */
 	public int seleccionActividadesPonderada(int [] c, int [] f, int [] b){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [c.length];
@@ -88,6 +113,13 @@ public class AlgoritmoAproximado {
 		return beneficio;
 	}
 	
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @param b : Un array de beneficios sin ordenar
+	 * @return El beneficio obtenido.Además, imprime por pantalla, el array de soluciones y el beneficio
+	 */
 	public int seleccionActividadesPonderada2(int []c, int [] f, int [] b){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
@@ -118,6 +150,13 @@ public class AlgoritmoAproximado {
 		return beneficio;
 	}
 	
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @param b : Un array de beneficios sin ordenar
+	 * @return El beneficio obtenido.Además, imprime por pantalla, el array de soluciones y el beneficio
+	 */
 	public int seleccionActividadesPonderada3(int [] c, int [] f , int [] b){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
@@ -143,6 +182,15 @@ public class AlgoritmoAproximado {
 		System.out.println("El beneficio es : "+ beneficio);
 		return beneficio;
 	}
+	
+	/**
+	 * 
+	 * @param c : Un array de valores de comienzo sin orden
+	 * @param f	: Un array de valores de fin sin orden
+	 * @param b: Un array de beneficios sin ordenar
+	 * @return El beneficio obtenido.Además, imprime por pantalla, el array de soluciones y el beneficio
+	 */
+	
 	public int seleccionActividadesPonderada4(int [] c,int [] f, int [] b){
 		boolean [] sol = new boolean [c.length];
 		int [] indices = new int [f.length];
@@ -168,11 +216,7 @@ public class AlgoritmoAproximado {
 				sol[indices[i]] = true;
 			}
 		}
-<<<<<<< HEAD
-		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la cuarta funcion de aproximacion es:",sol);
-=======
-		ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de aproximacion es:",sol);
->>>>>>> devJorge
+ImprimirSolucion("\nLa solución para el algoritmo aproximado con la tercera funcion de aproximacion es:",sol);
 		System.out.println("El beneficio es : " + beneficio);
 		return beneficio;
 	}
@@ -261,4 +305,6 @@ public class AlgoritmoAproximado {
     	}
     	return true;
     }
+
+	
 }
