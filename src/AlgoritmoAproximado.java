@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class AlgoritmoAproximado {
 	public int seleccionActividadesPonderadoVoraz (int [] c, int [] f, int [] b){
 		
@@ -257,4 +259,6 @@ public class AlgoritmoAproximado {
     	}
     	return true;
     }
+
+	
 }

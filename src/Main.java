@@ -1,4 +1,4 @@
-
+import java.util.Random;
 
 public class Main {
 
@@ -27,13 +27,15 @@ public class Main {
 		int [] com5 = {3,8,11,10};
 		int [] fin5 = {13,11,22,40};
 		int [] ben5 = {4,7,3,10};
-
+		
+			
 		alg.seleccionActividadesPonderadoVoraz(com2, fin2, ben2);	 	
-	 	alg.seleccionActividadesPonderadoVoraz2(com2, fin2, ben2);
+		alg.seleccionActividadesPonderadoVoraz2(com2, fin2, ben2); 	
 		alg.seleccionActividadesPonderada(com2, fin2, ben2);
 		alg.seleccionActividadesPonderada2(com2, fin2, ben2);
 		alg.seleccionActividadesPonderada3(com2, fin2, ben2);
 		alg.seleccionActividadesPonderada4(com2, fin2, ben2);
+
 	}
 
 }
