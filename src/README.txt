@@ -1,0 +1,1 @@
+Esta carpeta contiene el código de ambas prácticas, el correspondiente a la práctica 2 es AlgoritmoAproximado.java y el main utilizado también hace referencia a esta práctica. Se incluye el código de la anterior práctica por si acaso resultase necesario.

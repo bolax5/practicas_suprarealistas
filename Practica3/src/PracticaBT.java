@@ -1,9 +1,19 @@
-import java.util.Arrays;
 
 public class PracticaBT {
-	int longitud=Integer.MAX_VALUE;
+	int longitud;
 	int sol[];
+	
+	/**
+	 * Este metodo es un algoritmo de backtracking que calcula la mejor solucion para el problema de colocacion de n componentes en una placa con n huecos.
+	 * 
+	 * 
+	 * @param N : Matriz de numero de conexiones entre componentes.
+	 * @param D : Matriz de distancias entre huecos.
+	 * @return : Un array con la mejor solucion.
+	 */
+	
 	public int[] algoritmoBT (int [][] N, int [][] D){
+		longitud=Integer.MAX_VALUE;
 		sol = new int[N.length];
 		int sol_parcial[] = new int[N.length];
 		boolean [] escogidos = new boolean[N.length];
@@ -15,15 +25,20 @@ public class PracticaBT {
 					escogidos[i] = false;
 				}
 			}
-		
+		imprimirMejorSolucion(sol);
+		System.out.println("La longitud minima es: " +longitud);
 		return sol;
 	}
-	public void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
+	
+	private void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
 		sol_parcial[etapa] = componente;
 		if(etapa==sol_parcial.length-1){
 			//Soy una hoja
 			int x = calcularCable(sol_parcial, N, D);
+			
+			
 			if(x < longitud){
+				
 				for (int i = 0; i < D.length; i++) {
 					sol[i]=sol_parcial[i];
 				};
@@ -52,4 +67,16 @@ public class PracticaBT {
 		}
 		return cable;
 	}
+	private void imprimirMejorSolucion(int [] a){
+		System.out.print("La mejor solucion es:" );
+		for (int i = 0; i < a.length; i++) {
+			if (i==0){
+				System.out.print("{"+ a[i] + ", ");
+			}else if ((i>0) && (i<a.length-1)){
+				System.out.print(a[i] +", ");
+			}else{
+				System.out.println(a[i] + "}");
+			}
+		}
+	}	
 }
