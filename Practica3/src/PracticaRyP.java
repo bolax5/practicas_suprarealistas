@@ -11,7 +11,6 @@ public class PracticaRyP {
 			pS[i] = i;
 			sol[i] = i;
 		}
-		
 		top = calcularCable (pS,N,D);
 		int sol_parcial[] = new int[N.length];
 		boolean [] escogidos = new boolean[N.length];
@@ -22,6 +21,7 @@ public class PracticaRyP {
 		}
 		
 		for (int i = 0; i < escogidos.length; i++) {
+			
 			escogidos[i] = true;
 			algoritmoBTRecur(sol_parcial,escogidos,0,i,N,D);
 			escogidos[i] = false;
@@ -88,21 +88,25 @@ public class PracticaRyP {
 		int aux =0;
 		for (int i = etapa; i < escogidos.length; i++) {
 			if(sol_parcial[i-1]!=-1){
-				aux = N[sol_parcial[i-1]][i] * D[i-1][i];
+					aux = N[sol_parcial[i-1]][0] * D[i-1][0];
+					
 				for (int j = 0; j < escogidos.length; j++) {
 					if(!escogidos[j]){
-						if (aux > N[sol_parcial[i-1]][j] * D[i-1][i] && N[sol_parcial[i-1]][j] * D[i-1][i]!=0) {
-							aux = N[sol_parcial[i-1]][j] * D[i-1][i];
+						if ((aux >= N[sol_parcial[i-1]][j] * D[i-1][i]) && (N[sol_parcial[i-1]][j] * D[i-1][i])!=0) {
+							aux = N[sol_parcial[i-1]][j] * D[i-1][i];	
 							
 						}
 					}
 				}
+				
 			}
 			minimo += aux;
+			
 				
 		}
-			
+		
 		//System.out.println(minimo);
 		return minimo;
 	}
+	
 }

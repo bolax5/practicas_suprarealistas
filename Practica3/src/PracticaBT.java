@@ -1,4 +1,3 @@
-
 public class PracticaBT {
 	int longitud;
 	int sol[];
