@@ -36,22 +36,20 @@ public class PracticaRyP {
 	
 	private void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
 		sol_parcial[etapa] = componente;
-		int cota = calcularCable(sol_parcial, N, D)+calcularCota(N,D,sol_parcial,escogidos,etapa);
+		int cota = calcularCable(sol_parcial, N, D);
 		if(etapa==sol_parcial.length-1){
 			//Soy una hoja
-			
 			if(cota<longitud){
 				for (int i = 0; i < D.length; i++) {
 					sol[i]=sol_parcial[i];
 				}
-				
-				longitud = calcularCable(sol_parcial,N ,D);
+				longitud = cota;
 				
 			}
 			sol_parcial[etapa] = -1;
 		}
 		else{
-			
+			cota += calcularCota(N,D,sol_parcial,escogidos,etapa);
 			if (cota<longitud){
 				for (int i = 0; i < escogidos.length; i++) {
 					if(!escogidos[i]){
@@ -61,12 +59,6 @@ public class PracticaRyP {
 						
 					}
 				}
-			}else{
-				for (int i = 0; i < D.length; i++) {
-					System.out.print(sol_parcial[i]);
-				}
-				System.out.print(" => cable= "+cota);
-				System.out.println();
 			}
 			sol_parcial[etapa] = -1;
 		}
@@ -104,13 +96,10 @@ public class PracticaRyP {
 						aux =D[i][j];
 					}
 				}
-				if (aux != Integer.MAX_VALUE)
+				if (aux != Integer.MAX_VALUE){
 					minimo += aux;
+				}
 			}
-				
-			
-		
-		//System.out.println(minimo);
 		return minimo;
 	}
 	
