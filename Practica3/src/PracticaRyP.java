@@ -36,16 +36,19 @@ public class PracticaRyP {
 	
 	private void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
 		sol_parcial[etapa] = componente;
-		int cota = calcularCable(sol_parcial, N, D)+ calcularCota(N,D,sol_parcial,escogidos,etapa+1);
+		int cota = calcularCable(sol_parcial, N, D)+calcularCota(N,D,sol_parcial,escogidos,etapa);
 		if(etapa==sol_parcial.length-1){
 			//Soy una hoja
+			
 			if(cota<longitud){
 				for (int i = 0; i < D.length; i++) {
 					sol[i]=sol_parcial[i];
 				}
 				
 				longitud = calcularCable(sol_parcial,N ,D);
+				
 			}
+			sol_parcial[etapa] = -1;
 		}
 		else{
 			
@@ -55,9 +58,17 @@ public class PracticaRyP {
 						escogidos[i] = true;
 						algoritmoBTRecur(sol_parcial,escogidos,etapa+1,i,N,D);
 						escogidos[i] = false;
+						
 					}
 				}
+			}else{
+				for (int i = 0; i < D.length; i++) {
+					System.out.print(sol_parcial[i]);
+				}
+				System.out.print(" => cable= "+cota);
+				System.out.println();
 			}
+			sol_parcial[etapa] = -1;
 		}
 		
 	}
@@ -85,25 +96,19 @@ public class PracticaRyP {
 	}
 	private int calcularCota (int [][] N, int [][] D, int [] sol_parcial, boolean []escogidos,int etapa){
 		int minimo = 0;
-		int aux =0;
-		for (int i = etapa; i < escogidos.length; i++) {
-			if(sol_parcial[i-1]!=-1){
-					aux = N[sol_parcial[i-1]][0] * D[i-1][0];
-					
-				for (int j = 0; j < escogidos.length; j++) {
-					if(!escogidos[j]){
-						if ((aux >= N[sol_parcial[i-1]][j] * D[i-1][i]) && (N[sol_parcial[i-1]][j] * D[i-1][i])!=0) {
-							aux = N[sol_parcial[i-1]][j] * D[i-1][i];	
-							
-						}
+		int aux = 0;
+			for (int i = etapa; i<D.length; i++){
+				aux = Integer.MAX_VALUE;
+				for(int j=i+1;j<D.length; j++){
+					if (D[i][j]<aux){
+						aux =D[i][j];
 					}
 				}
-				
+				if (aux != Integer.MAX_VALUE)
+					minimo += aux;
 			}
-			minimo += aux;
-			
 				
-		}
+			
 		
 		//System.out.println(minimo);
 		return minimo;
