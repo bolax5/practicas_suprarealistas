@@ -71,10 +71,10 @@ public class Main {
 		PracticaRyP pryp = new PracticaRyP();
 		
 		/*Ejecucion Algoritmo Vuelta Atras*/
-		pbt.algoritmoBT(N5, D5);
+		pbt.algoritmoBT(N3, D3);
 	
 		/*Ejecucion Algoritmo Ramificacion y Poda*/
-		pryp.algoritmoRyP(N5, D5);
+		pryp.algoritmoRyP(N3, D3);
 		
 		
 		

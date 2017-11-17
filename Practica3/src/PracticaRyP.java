@@ -2,19 +2,15 @@
 public class PracticaRyP {
 	int[] sol;
 	int longitud;
-	int top;
-	int [] pS;
 	public int [] algoritmoRyP(int[][] N,int [][] D){
 		sol = new int[N.length];
-		pS = new int[N.length];
 		for(int i=0;i<N.length;i++){
-			pS[i] = i;
 			sol[i] = i;
 		}
-		top = calcularCable (pS,N,D);
+		longitud = calcularCable (sol,N,D);
 		int sol_parcial[] = new int[N.length];
 		boolean [] escogidos = new boolean[N.length];
-		longitud=top;
+		
 		//  Seteamos las soluciones a -1 //
 		for (int i = 0; i < escogidos.length; i++) {
 			sol_parcial[i] = -1;
@@ -23,7 +19,7 @@ public class PracticaRyP {
 		for (int i = 0; i < escogidos.length; i++) {
 			
 			escogidos[i] = true;
-			algoritmoBTRecur(sol_parcial,escogidos,0,i,N,D);
+			algoritmoRyPRecur(sol_parcial,escogidos,0,i,N,D);
 			escogidos[i] = false;
 		}
 		
@@ -34,7 +30,7 @@ public class PracticaRyP {
 	}
 	
 	
-	private void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
+	private void algoritmoRyPRecur(int [] sol_parcial, boolean [] escogidos, int etapa,int componente, int [][] N, int [][] D){
 		sol_parcial[etapa] = componente;
 		int cota = calcularCable(sol_parcial, N, D);
 		if(etapa==sol_parcial.length-1){
@@ -49,12 +45,12 @@ public class PracticaRyP {
 			sol_parcial[etapa] = -1;
 		}
 		else{
-			cota += calcularCota(N,D,sol_parcial,escogidos,etapa);
+			cota += calcularCota(D,etapa);
 			if (cota<longitud){
 				for (int i = 0; i < escogidos.length; i++) {
 					if(!escogidos[i]){
 						escogidos[i] = true;
-						algoritmoBTRecur(sol_parcial,escogidos,etapa+1,i,N,D);
+						algoritmoRyPRecur(sol_parcial,escogidos,etapa+1,i,N,D);
 						escogidos[i] = false;
 						
 					}
@@ -86,7 +82,7 @@ public class PracticaRyP {
 			}
 		}
 	}
-	private int calcularCota (int [][] N, int [][] D, int [] sol_parcial, boolean []escogidos,int etapa){
+	private int calcularCota (int [][] D,int etapa){
 		int minimo = 0;
 		int aux = 0;
 			for (int i = etapa; i<D.length; i++){
