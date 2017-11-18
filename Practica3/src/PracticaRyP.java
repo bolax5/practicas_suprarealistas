@@ -15,7 +15,9 @@ public class PracticaRyP {
 		for (int i = 0; i < escogidos.length; i++) {
 			sol_parcial[i] = -1;
 		}
-		
+
+		/*Llamada del primer nivel.Se marca el elemento como escogido y cuando se vuelve atras se desmarca para
+		que pueda ser utilizado en otra llamada*/
 		for (int i = 0; i < escogidos.length; i++) {
 			
 			escogidos[i] = true;
@@ -23,7 +25,7 @@ public class PracticaRyP {
 			escogidos[i] = false;
 		}
 		
-		
+		//Impresión de la solucion obtenida y de la longitud.
 		imprimirMejorSolucion(sol);
 		System.out.println("La longitud minima es: " +longitud);
 		return sol;
@@ -31,6 +33,8 @@ public class PracticaRyP {
 	
 	
 	private void algoritmoRyPRecur(int [] sol_parcial, boolean [] escogidos, int etapa,int componente, int [][] N, int [][] D){
+		/*Se marca el componente como parte de la solución y dependiendo de si estamos en un nodo hoja o en otro nodo se hace una cosa u otra.
+		Si estamos en un nodo hoja se comprueba que la longitud de la solución obtenida es menor que la anterior y si es así se actualiza*/
 		sol_parcial[etapa] = componente;
 		int cota = calcularCable(sol_parcial, N, D);
 		if(etapa==sol_parcial.length-1){
@@ -45,6 +49,8 @@ public class PracticaRyP {
 			sol_parcial[etapa] = -1;
 		}
 		else{
+			/*Sin embargo, si no es un nodo hoja, se vuelve a hacer llamada recursiva con aquellos componentes que no hayan sido escogidos.
+			 Si la cota optimista es mayor que la cota pesimista no se hace esta llamada, por lo que esa rama se poda*/
 			cota += calcularCota(D,etapa);
 			if (cota<longitud){
 				for (int i = 0; i < escogidos.length; i++) {
@@ -60,6 +66,7 @@ public class PracticaRyP {
 		}
 		
 	}
+	//Funcion que calcula la longitud del cable de la parte real.
 	public int calcularCable (int[] sol_parcial, int [][]N, int [][]D){
 		int cable = 0;
 		for (int i = 0; i < sol_parcial.length; i++) {
@@ -82,6 +89,7 @@ public class PracticaRyP {
 			}
 		}
 	}
+	//Funcion que calcula la longitud del cable imaginario utilizado para calcular la cota.
 	private int calcularCota (int [][] D,int etapa){
 		int minimo = 0;
 		int aux = 0;

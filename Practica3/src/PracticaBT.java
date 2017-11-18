@@ -16,7 +16,12 @@ public class PracticaBT {
 		sol = new int[N.length];
 		int sol_parcial[] = new int[N.length];
 		boolean [] escogidos = new boolean[N.length];
-		
+			
+
+
+		/*Llamada del primer nivel.Se marca el elemento como escogido y cuando se vuelve atras se desmarca para
+		que pueda ser utilizado en otra llamada*/
+
 			for (int i = 0; i < escogidos.length; i++) {
 				if(!escogidos[i]){
 					escogidos[i] = true;
@@ -30,6 +35,8 @@ public class PracticaBT {
 	}
 	
 	private void algoritmoBTRecur(int [] sol_parcial, boolean [] escogidos, int etapa, int componente, int [][] N, int [][] D){
+		/*Se marca el componente como parte de la solución y dependiendo de si estamos en un nodo hoja o en otro nodo se hace una cosa u otra.
+		Si estamos en un nodo hoja se comprueba que la longitud de la solución obtenida es menor que la anterior y si es así se actualiza*/
 		sol_parcial[etapa] = componente;
 		if(etapa==sol_parcial.length-1){
 			//Soy una hoja
@@ -45,6 +52,7 @@ public class PracticaBT {
 				longitud = x;
 			}
 		}
+		/*Sin embargo, si no es un nodo hoja, se vuelve a hacer llamada recursiva con aquellos componentes que no hayan sido escogidos.*/
 		else{
 			for (int i = 0; i < escogidos.length; i++) {
 				if(!escogidos[i]){
@@ -56,6 +64,7 @@ public class PracticaBT {
 		}
 		
 	}
+	//Funcion que calcula la longitud del cable.
 	public int calcularCable (int[] sol_parcial, int [][]N, int [][]D){
 		int cable = 0;
 		for (int i = 0; i < sol_parcial.length; i++) {
