@@ -51,6 +51,7 @@ public class EliminacionRecursividad {
 		}
 		for(int j=1;j<=n;j++)
 			for (int i =0; i<m;i++){
+
 				if(i<=1){
 					resultado[i] = i+1 * j;
 				}
