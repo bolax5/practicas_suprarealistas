@@ -1,5 +1,6 @@
 
 public class EliminacionRecursividad {
+	//ALGORITMO DE MEMORIZACIÓN
 	public static int mem(int m, int n){
 		int resultado[][] = new int [m][n+1];
 		for (int i = 0; i<m ; i++){
@@ -23,7 +24,7 @@ public class EliminacionRecursividad {
 			resultado[m-1][n] = resultado[m-2][n]+resultado [m-1][n-1]+resultado [m-2][n-1]+resultado [m-3][n-1];	
 		}	
 	}
-	
+	//ALGORTIMO DE TABULACION
 	public static int tab (int m ,int n){
 		int [][] resultado = new int [m][n+1];
 			for (int i = 0; i<m; i++){
@@ -42,6 +43,7 @@ public class EliminacionRecursividad {
 		return resultado[m-1][n];
 		
 	}
+	//ALGORITMO DE TABULACION OPTIMIZADA
 	public static int tabOpt(int m, int n){
 		int resultado[] = new int [m];
 		int aux1= 0;
@@ -55,7 +57,6 @@ public class EliminacionRecursividad {
 					aux1 = resultado[i];
 					resultado[i] = (i+1) * j;
 				}
-				
 				else if(i==1){
 					aux2 = resultado[i];
 					resultado[i] = (i+1) * j;
@@ -67,7 +68,6 @@ public class EliminacionRecursividad {
 				}else if (i==m-1){
 						resultado[i] = resultado[i]+aux2+aux1+resultado[i-1];
 				}
-			
 			}
 		return resultado[m-1];
 	}
