@@ -64,6 +64,7 @@ public class EliminacionRecursividad {
 				else if ((i<m-1) && (i>1)){
 						int a = aux1+aux2+resultado[i-1];
 						aux1 =resultado[i];
+						
 						resultado[i] = resultado[i]+a;
 				}else if (i==m-1){
 						resultado[i] = resultado[i]+aux2+aux1+resultado[i-1];
