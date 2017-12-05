@@ -54,17 +54,17 @@ public class EliminacionRecursividad {
 		for(int j=1;j<=n;j++)
 			for (int i =0; i<m;i++){
 				if(i==0){
-					aux1 = resultado[i];
+					aux2 = resultado[i];
 					resultado[i] = (i+1) * j;
 				}
 				else if(i==1){
-					aux2 = resultado[i];
+					aux1 = resultado[i];
 					resultado[i] = (i+1) * j;
 				}	
 				else if ((i<m-1) && (i>1)){
 						int a = aux1+aux2+resultado[i-1];
+						aux2 = aux1;
 						aux1 =resultado[i];
-						
 						resultado[i] = resultado[i]+a;
 				}else if (i==m-1){
 						resultado[i] = resultado[i]+aux2+aux1+resultado[i-1];
