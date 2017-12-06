@@ -1,7 +1,7 @@
 
 public class ProgramacionDinamica {
 	public double beneficio (int c_inicial, int[]GCD, double[] RCD, int [] GBT, double [] RBT ){
-	//Dado que necesitamos obtener el array de beneficios, invocamos a la funcion que devuelve el array completo
+	//Dado que necesitamos obtener el array de beneficios, para calcular el beneficio total, invocamos a la funcion que devuelve el array completo
 	//y accedemos a la última pósicion
 		return beneficioSolucion(c_inicial,GCD, RCD, GBT,RBT )[GCD.length];  
 	} 
