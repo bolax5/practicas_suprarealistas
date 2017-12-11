@@ -18,8 +18,17 @@ public class main {
 		
 		ProgramacionDinamica pd = new ProgramacionDinamica();
 		double d = pd.beneficio(4000, GCD, RCD, GBT, RBT);
-		pd.beneficioSolucion(4000, GCD, RCD, GBT, RBT);
+		int [] arr = pd.beneficioSolucion(4000, GCD, RCD, GBT, RBT);
 		System.out.println("El beneficio obtenido es : " + d);
+		
+		System.out.print("La solucion es : {");
+		for (int i = 0;i<arr.length;i++){
+			if(i==arr.length-1){
+			System.out.print(arr[i]+ "}");
+			}else{
+				System.out.print(arr[i] +", ");
+			}
+		}
 	}
 
 }
