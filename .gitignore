@@ -1,1 +1,7 @@
 /bin/
+/MonteCarloRules/nbproject/private/
+/MonteCarloRules/build/
+/MonteCarloRules/dist/
+*.xml
+*.properties
+*.mf
