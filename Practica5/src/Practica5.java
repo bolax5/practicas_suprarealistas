@@ -13,11 +13,7 @@ public class Practica5 {
      */
     @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
-        // TODO code application logic here
-        int[][] a = {{1,2,3},{4,5,6},{7,8,9}};
-        int[][] b = {{3,1,4},{1,5,9},{2,6,5}};
-        int[][] c = {{11,29,37},{29,65,91},{47,99,45}};
-        System.out.println("Para las matrices introducidas: el resultado es :" +new MatrixMultiplicity().MonteCarloMatrix(a, b, c, 3,10));
+        //Ejecución del algoritmo de Sherwood de las N_Reinas
         int n = 8;
         boolean[][] tablero =   new boolean[n][n];
         int[] solucion = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -72,15 +68,15 @@ public class Practica5 {
         
         
         System.out.println("Nodos en el exito: "+Arrays.toString(nodosOK));
-        //System.out.println("Exitos: "+Arrays.toString(exitos));
         System.out.println("Nodos en el fracaso: "+Arrays.toString(nodosKO));
-        //System.out.println("Fracasos: "+Arrays.toString(fallos));
         System.out.println("Probabilidad: "+Arrays.toString(probabilidad));
         System.out.println("Esperados: "+Arrays.toString(t));
         
-
         
-    }
-    
-        
+       //Ejecución del algoritmo de la verificación de matrices
+        int[][] a = {{1,2,3},{4,5,6},{7,8,9}};
+        int[][] b = {{3,1,4},{1,5,9},{2,6,5}};
+        int[][] c = {{11,29,37},{29,65,91},{47,99,45}};
+        System.out.println("Para las matrices introducidas: el resultado es :" +new MatrixMultiplicity().MonteCarloMatrix(a, b, c, 3,10));
+    }   
 }
