@@ -27,8 +27,7 @@ public class Practica5 {
         boolean[][] tablero =   new boolean[n][n];
         int[] solucion = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
         N_Reinas reina; new N_Reinas();
-        int veces =1;
-        int bucles = 10;
+        int bucles = 1000;
         float nodosKOTemp = 0;
         float[] nodosOK = new float[n+1];
         float[] nodosKO = new float[n+1];
@@ -43,7 +42,6 @@ public class Practica5 {
                 do{
                     tablero = new boolean[n][n];
                     reina= new N_Reinas();
-                    veces++;
                     if(reina.buscarReinas (n, 0,solucion, tablero,i)){
                         exitos[i]++;
                         nodosOK[i] += reina.getNodos();
@@ -57,29 +55,31 @@ public class Practica5 {
                     }
                     reina.reset();
                 }while(!success);
-                if(fallosTemp!=0)
+                if(fallosTemp!=0){
                     nodosKO[i]+=nodosKOTemp/fallosTemp;
-                    probabilidad[i]+= 1.0/(1.0+fallosTemp);
+                }
+                probabilidad[i]+= 1.0/(1.0+fallosTemp);
                 nodosKOTemp = 0;
                 fallosTemp=0.0f;
                 
                 //System.out.println(Arrays.toString(solucion))   
             }
-            fallos[i]=fallos[i]/bucles;
+            //fallos[i]=fallos[i]/bucles;
             //probabilidad[i]= 1.0/(1.0+fallos[i]);
             probabilidad[i]=probabilidad[i]/bucles;
             nodosOK[i]=nodosOK[i]/bucles +1;
             
             if(fallos[i]!=0)
-                nodosKO[i]++;
-            t[i]=nodosOK[i]+fallos[i]*(1-probabilidad[i])/probabilidad[i];
+                nodosKO[i]=nodosKO[i]/bucles +1;
+            t[i]=nodosOK[i]+nodosKO[i]*(1-probabilidad[i])/probabilidad[i];
         }
         
         
+        
+        System.out.println("Exitos: "+Arrays.toString(exitos));
+        System.out.println("Fracasos: "+Arrays.toString(fallos));
         System.out.println("Nodos en el exito: "+Arrays.toString(nodosOK));
-        //System.out.println("Exitos: "+Arrays.toString(exitos));
         System.out.println("Nodos en el fracaso: "+Arrays.toString(nodosKO));
-        //System.out.println("Fracasos: "+Arrays.toString(fallos));
         System.out.println("Probabilidad: "+Arrays.toString(probabilidad));
         System.out.println("Esperados: "+Arrays.toString(t));
         

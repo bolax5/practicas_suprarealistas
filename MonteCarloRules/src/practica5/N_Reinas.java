@@ -5,6 +5,7 @@
  */
 package practica5;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -27,7 +28,7 @@ public class N_Reinas {
             for (int j = 0; j < n &&!exito; j++) {
                 infactible= false;
                 
-                for (int k = 0; k < n && !infactible; k++) {
+                for (int k = 0; k < i && !infactible; k++) {
                     
                     if((tablero[k][j]||((j+i-k)>=0 && (j+i-k)<n && tablero[k][j+i-k])||((j+k-i)<n && (j+k-i)>=0 && tablero[k][j+k-i]))){
                         infactible = true;
@@ -41,7 +42,7 @@ public class N_Reinas {
                 if (i==n-1 &&!infactible)
                     exito =true;
                 else if(!infactible){
-                    exito = buscarReinas(n,i+1,solucion,tablero, 0);
+                    exito = buscarReinas(n,i+1,solucion,tablero, random);
                     if (!exito){
                         solucion[i]=-1;
                         tablero[i][j]=false;
@@ -52,24 +53,31 @@ public class N_Reinas {
             Random rand = new Random();
             int r=0;
             infactible=true;
+            ArrayList<Integer> posibles = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                posibles.add(j);
+            }
             
-            r =rand.nextInt(n);
+            //r =rand.nextInt(n);
             infactible= false;
-            for (int k = 0; k < n && !infactible; k++) {
-                if((tablero[k][r]||((r+i-k)>=0 && (r+i-k)<n && tablero[k][r+i-k])||((r+k-i)<n && (r+k-i)>=0 && tablero[k][r+k-i]))){
-                    infactible = true;
-                } 
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < i ; k++) {
+                    if((tablero[k][j]||((j+i-k)>=0 && (j+i-k)<n && tablero[k][j+i-k])||((j+k-i)<n && (j+k-i)>=0 && tablero[k][j+k-i]))){
+                        posibles.remove((Integer)j);
+                        
+                    } 
+                }
             }
-
-
-            if (!infactible){
-                    tablero[i][r]=true;
-                    solucion[i]=r;
-                    nodos++;
+            if (!posibles.isEmpty()){
+                r =rand.nextInt(posibles.size());
+                r=posibles.get(r);
+                tablero[i][r]=true;
+                solucion[i]=r;
+                nodos++;
             }
-            if (i==n-1 &&!infactible)
+            if (i==n-1 &&!posibles.isEmpty())
                 exito =true;
-                else if(!infactible){
+                else if(!posibles.isEmpty()){
                     exito = buscarReinas(n,i+1,solucion,tablero, random);
                     
                 }
