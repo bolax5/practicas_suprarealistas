@@ -28,19 +28,22 @@ public class N_Reinas {
             for (int j = 0; j < n &&!exito; j++) {
                 infactible= false;
                 
+                //Comprobación de factibilidad de la reina
                 for (int k = 0; k < n && !infactible; k++) {
-                    
                     if((tablero[k][j]||((j+i-k)>=0 && (j+i-k)<n && tablero[k][j+i-k])||((j+k-i)<n && (j+k-i)>=0 && tablero[k][j+k-i]))){
                         infactible = true;
                     } 
                 }
+                //Si es factible se marca como solución y se aumenta el número de nodos visitados.
                 if (!infactible){
                     tablero[i][j]=true;
                     solucion[i]=j;
                     nodos++;
-                }   
+                } 
+                //Si es la última reina y es factible se ha encontrado solución.
                 if (i==n-1 &&!infactible)
                     exito =true;
+                //Si no es la última reina se llama recursivamente de nuevo.
                 else if(!infactible){
                     exito = buscarReinas(n,i+1,solucion,tablero, 0);
                     if (!exito){
