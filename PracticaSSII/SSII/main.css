@@ -1,0 +1,14 @@
+main{
+    background-color: black;
+    min-height: -webkit-fill-available;
+}
+h1{
+    padding: 40px
+}
+.carousel-inner{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.card{
+    margin-left: 5%;
+}
