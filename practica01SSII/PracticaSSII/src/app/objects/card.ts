@@ -6,4 +6,6 @@ export class Card {
   description: String;
   imgSource?: String;
   videoSource?: SafeResourceUrl;
+  playTime?: number;
+  playability?: boolean;
 }
