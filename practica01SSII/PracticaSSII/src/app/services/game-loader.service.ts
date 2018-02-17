@@ -75,7 +75,7 @@ export class GameLoaderService {
     {
       title: 'Los Sims 4',
       // tslint:disable-next-line:max-line-length
-      description: 'Los Sims 4 es un videojuego de simulación social y de vida',
+      description: 'Disfruta del poder de crear y controlar a personas en un mundo virtual donde no hay reglas. Expresa tu creatividad personalizando el aspecto y la personalidad de tus Sims, y constrúyeles la casa perfecta. Desarrolla las relaciones de tus Sims, asígnales profesiones y explora mundos vibrantes',
       imgSource: './assets/img/Sims.jpg',
       videoSource: 'V7SDsVCyJ_w',
       playability: true,
@@ -93,7 +93,7 @@ export class GameLoaderService {
     {
       title: 'Rocket League',
       // tslint:disable-next-line:max-line-length
-      description: 'Rocket League es un videojuego que combina el fútbol con los vehículos.',
+      description: 'El juego se asemeja al fútbol, pero utilizando vehículos en lugar de jugadores y una pelota de gran tamaño. En los partidos pueden participar desde 1 vs 1 hasta 4 vs 4 jugadores distribuidos en dos equipos, naranja y azul. Cada vehículo puede utilizar propulsión extra, tanto para acelerar como para desplazarse por el aire, siendo esta una característica fundamental del juego.',
       imgSource: './assets/img/Rocket.jpg',
       videoSource: 'iwTvsPfYCRA',
       playability: true,
@@ -102,7 +102,7 @@ export class GameLoaderService {
     {
       title: 'Mario + Rabbids King',
       // tslint:disable-next-line:max-line-length
-      description: 'El universo de Super Mario es invadido por los Rabbids en Mario + Rabbids Kingdom Battle!',
+      description: 'Dos mundos colisionan para alborozo de los fans de Mario y los Rabbids en Mario + Rabbids® Kingdom Battle, una descacharrante aventura exclusiva para Nintendo Switch. Un equipo de héroes de lo más dispar y disparatado tendrá como misión restaurar el orden establecido en el Reino Champiñón y luchar en extraños mundos rebosantes de combates por turnos, desafiantes puzles e impredecibles enemigos.',
       imgSource: './assets/img/Mario.jpg',
       videoSource: '-Bjfefm-8sM',
       playability: true,
@@ -111,7 +111,7 @@ export class GameLoaderService {
     {
       title: 'Kingdom Hearts III',
       // tslint:disable-next-line:max-line-length
-      description: 'Sora, Donald, y Goofy vuelven en una aventura cargada de magia y emoción con Kingdom Hearts III',
+      description: 'Kingdom Hearts 3 es el tercer título de una saga que vuelve a PlayStation 4. Sora seguirá siendo el protagonista y deberemos librar una nueva lucha para mantener el poder de la luz lidiando contra el malvado Maestro Xehanort. Square Enix y Disney brindan al jugador un casting cargado de personajes tan conocidos como Donald, Goofy, Mickey o Riku que se dividirán en dos grupos para avanzar en la aventura.',
       imgSource: './assets/img/Kingdom.png',
       videoSource: 'c2gotXHPL7o',
       playability: true,
