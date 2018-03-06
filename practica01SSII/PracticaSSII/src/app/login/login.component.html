@@ -1,0 +1,15 @@
+<main class="content-wrapper text-light">
+  <section class="form-wrapper">
+    <form #f="ngForm" (ngSubmit)="submit(f)">
+      <div  class="col-xs-12">
+          <label for="user">Usuario</label>
+          <input class="w-100" type="text" name="user" [(ngModel)]="user" required>
+      </div>
+      <div class="col-xs-12">
+          <label for="password">Contraseña</label>
+          <input class="w-100" type="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <button class="btn btn-large btn-light">Acceder</button>
+    </form>
+  </section>
+</main>

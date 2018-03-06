@@ -1,0 +1,19 @@
+Autores: 
+    Jorge Aranda García, DNI: 50544452c
+    Jose Vicente Bañuls, DNI: 50215596H
+Observaciones:
+
+    Para iniciar la maqueta, abre el archivo index.html de la carpeta dist
+
+    Hemos asumido que cada desarrollador elige la duración de su demo, por lo que hemos 
+    modificado la hora de juego por la duración del video que la simula.
+
+    En las demos puedes avanzar y pausar, pero no retroceder, y puedes parar una demo,
+    jugar otra y despues volver a la original.
+
+    Una vez agotado el tiempo de la demo, se deshabilita la opción.
+
+    El filtrado de juegos en la barra de navegación es operativo
+
+    En la misma barra de navegación puedes activar el modo administrador, con estadísticas
+    de juego

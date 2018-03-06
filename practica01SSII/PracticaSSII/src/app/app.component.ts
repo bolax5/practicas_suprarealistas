@@ -13,6 +13,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { NgbProgressbarConfig } from '@ng-bootstrap/ng-bootstrap/';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import { Chart } from 'angular-highcharts';
+import { PlotLoaderService } from './services/plot-loader.service';
 
 
 @Component({
@@ -24,19 +26,58 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 export class AppComponent implements OnInit {
   // @ViewChildren('owlElement') owlElement: OwlCarousel[];
   public tempConfig;
+  public admin: boolean;
   private modal: NgbModalRef;
   public games: Card[];
   public searchInput: string;
   private closeResult: string;
+  public chart;
 
   constructor(private service: GameLoaderService,
-    private modalService: NgbModal, private config: NgbProgressbarConfig) {}
+    private modalService: NgbModal, private config: NgbProgressbarConfig, private plot: PlotLoaderService) {}
 
   ngOnInit() {
+    const options = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Estadisticas de juego'
+      },
+      credits: {
+        enabled: true
+      },
+      legend: {
+        enabled: true
+      },
+      yAxis: {
+        min: 0,
+        title: {
+            text: 'Nº veces'
+        }
+      },
+      xAxis: {
+        categories: this.plot.getXAxis(),
+        crosshair: true
+      },
+      plotOptions: {
+          series: {
+              borderWidth: 0,
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.y} veces'
+              }
+          }
+      },
+      series: this.plot.getSeriesData()
+    };
     this.games = this.service.getGames();
     this.config.striped = true;
     this.config.animated = true;
     this.config.max = 100;
+    this.chart = new Chart(options);
+
+
     // this.owlElement.reInit();
   }
   checkArrayEmpty(): boolean {
@@ -44,7 +85,8 @@ export class AppComponent implements OnInit {
   }
   public heySoyUnBoton(content) {
     const options: NgbModalOptions = {};
-    options.size = 'sm';
+    options.size = 'lg';
+    options.windowClass = 'modal';
     this.modal = this.modalService.open(content, options);
   }
   private getDismissReason(reason: any): string {
