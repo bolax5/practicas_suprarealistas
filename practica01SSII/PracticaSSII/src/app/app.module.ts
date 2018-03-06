@@ -18,6 +18,8 @@ import { PlotLoaderService } from './services/plot-loader.service';
 import { LoginComponent } from './login/login.component';
 import { BootrsapComponent } from './bootrsap/bootrsap.component';
 import { MainComponent } from './main/main.component';
+import { LoginService } from './services/login.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -37,9 +39,10 @@ import { MainComponent } from './main/main.component';
     NgbModule.forRoot(),
     NgbTypeaheadModule,
     YoutubePlayerModule,
-    ChartModule
+    ChartModule,
+    HttpClientModule
   ],
-  providers: [GameLoaderService, NgbModal, PlotLoaderService],
+  providers: [GameLoaderService, LoginService, NgbModal, PlotLoaderService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
