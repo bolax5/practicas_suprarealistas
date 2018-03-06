@@ -11,7 +11,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
   public password: string;
-  public user: string;
+  public username: string;
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
