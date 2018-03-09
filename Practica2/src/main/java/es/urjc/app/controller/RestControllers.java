@@ -36,7 +36,9 @@ public class RestControllers {
 	private GameRepository gRepository;
 	private int attempts = 0;
     
-	
+	/*
+	 * PREINICIALIZACION DE JUEGOS Y USUARIOS PARA QUE LA BASE DE DATOS NO ESTE VACIA
+	 */
     
     @PostConstruct
     public void init() {
@@ -437,6 +439,7 @@ public class RestControllers {
         		 attempts++;
         		 if(attempts > 3) {
         			 u.setBlocked(1);
+        			 attempts=0;
         			 uRepository.save(u);
         			 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         		 }
