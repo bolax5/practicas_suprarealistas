@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,12 @@ public class Juego {
     private String studio;
     private String nationality;
     private int minAge;
+    @Column(length=700)
     private String description;
     private String demo;
+    private String imgSource;
+    private boolean playabality;
+    private int playTime;
     
     public Juego () {
     	
@@ -100,9 +105,29 @@ public class Juego {
 	public void setDemo(String demo) {
 		this.demo = demo;
 	}
-    
-    
-    
-	
+
+	public String getImgSource() {
+		return imgSource;
+	}
+
+	public void setImgSource(String imgSource) {
+		this.imgSource = imgSource;
+	}
+
+	public boolean isPlayabality() {
+		return playabality;
+	}
+
+	public void setPlayabality(boolean playabality) {
+		this.playabality = playabality;
+	}
+
+	public int getPlayTime() {
+		return playTime;
+	}
+
+	public void setPlayTime(int playTime) {
+		this.playTime = playTime;
+	}
 	
 }
