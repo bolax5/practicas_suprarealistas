@@ -357,9 +357,22 @@ public class RestControllers {
     	
     	u.setUsername("Admin");
     	u.setPassword("admin");
+    	u.setName("Federico");
+    	u.setSurname("Garcia Lorca");
+    	u.setEmail("fedeLorca@gmail.com");
+    	u.setBirthDate("5/06/1989");
+    	u.setCity("Fuente Vaqueros");
+    	u.setCountry("España");
     	u.setIsAdmin(1);
+    	
     	u1.setUsername("Paco-Gamer");
     	u1.setPassword("1234");
+    	u.setName("Miguel");
+    	u.setSurname("Hernandez Gilabert");
+    	u.setEmail("m.her@gmail.com");
+    	u.setBirthDate("30/10/1910");
+    	u.setCity("Orihuela");
+    	u.setCountry("España");
     	u1.setIsAdmin(0);
 
     	

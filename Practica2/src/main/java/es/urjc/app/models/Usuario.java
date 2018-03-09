@@ -37,7 +37,6 @@ public class Usuario {
     private int numAttempts;
     private int blocked;
     
-    private int leftDemoTime = 15;
     
     public Usuario()  {
     	
@@ -130,14 +129,6 @@ public class Usuario {
 
 	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
-	}
-
-	public int getLeftDemoTime() {
-		return leftDemoTime;
-	}
-
-	public void decreaseDemoTime(int decreaseTime) {
-		this.leftDemoTime = leftDemoTime - decreaseTime;
 	}
     
 }
