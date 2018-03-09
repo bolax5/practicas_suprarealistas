@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import es.urjc.app.models.*;
 import es.urjc.app.repositories.*;
 import es.urjc.app.responses.*;
-@CrossOrigin(origins="http://localhost:4200",maxAge=3600)
+@CrossOrigin(origins= {"http://localhost:4200","file://"},maxAge=3600)
 @RestController
 @RequestMapping("/")
 public class RestControllers {
@@ -471,16 +471,17 @@ public class RestControllers {
     }
     
     @RequestMapping(value = "/game", method = RequestMethod.POST)
-    public ResponseEntity<Juego> newGame(@RequestParam(value="name")String name, Integer minAge, Integer year, String studio,String version, String nationality,String description,String demo){
+    public ResponseEntity<Juego> newGame(@RequestBody Juego juego){
     	Juego j = new Juego();
-    	j.setName(name);
-    	j.setMinAge(minAge);
-    	j.setYear(year);
-    	j.setStudio(studio);
-    	j.setVersion(version);
-    	j.setNationality(nationality);
-    	j.setDescription(description);
-    	j.setDemo(demo);
+    	j.setName(juego.getName());
+    	j.setMinAge(juego.getMinAge());
+    	j.setYear(juego.getYear());
+    	j.setStudio(juego.getStudio());
+    	j.setVersion(juego.getVersion());
+    	j.setNationality(juego.getNationality());
+    	j.setDescription(juego.getDescription());
+    	j.setDemo(juego.getDemo());
+    	j.setImgSource(juego.getImgSource());
     	this.gRepository.save(j);
     	return new ResponseEntity<>(j,HttpStatus.CREATED);
     	
