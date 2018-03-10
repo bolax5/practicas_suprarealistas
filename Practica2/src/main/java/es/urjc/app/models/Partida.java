@@ -28,7 +28,6 @@ public class Partida {
     
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private Usuario user;
     
     

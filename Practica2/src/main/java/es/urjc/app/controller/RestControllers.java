@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.urjc.app.customClasses.*;
 import es.urjc.app.models.*;
 import es.urjc.app.repositories.*;
-import es.urjc.app.responses.*;
 @CrossOrigin(origins= {"http://localhost:4200","file://"},maxAge=3600)
 @RestController
 @RequestMapping("/")
@@ -34,8 +34,10 @@ public class RestControllers {
 	private IntentoRepository iRepository;
 	@Autowired
 	private GameRepository gRepository;
+	@Autowired
+	private PartidaRepository pRepository;
 	private int attempts = 0;
-    
+    private final static long timeLimit= 15;
 	/*
 	 * PREINICIALIZACION DE JUEGOS Y USUARIOS PARA QUE LA BASE DE DATOS NO ESTE VACIA
 	 */
@@ -72,7 +74,7 @@ public class RestControllers {
     	j1.setName("Fifa 18");
     	j1.setMinAge(3);
     	j1.setDemo("http://www.yotube.com");
-    	j1.setDescription("Call of Duty vuelve a sus raíces con WWII, el regreso de la serie de acción en primera persona a la Segunda Guerra Mundial. Desde las frías aguas de Normandía en el día D, avanzarás por todo el frente europeo enfrentándote al eje y defendiendo la libertad en un mundo al borde de la tiranía. Vive una historia de hermandad entre soldados en la mayor campaña ambientada en la Segunda Guerra Mundial, participa en algunas de las batallas más icónicas del conflicto en el brutal y realista modo multijugador en línea o coopera ante la amenaza de muertos vivientes en la historia independiente del nuevo modo zombies.");
+    	j1.setDescription("¿Estás preparado para tu temporada más importante hasta la fecha? Gracias al motor Frostbite, FIFA 18 hace que se confunda la línea que separa el mundo virtual del real, y consigue darle vida a los héroes, a los equipos y a las atmósferas que se viven en los partidos de verdad.");
     	j1.setNationality("Canadian");
     	j1.setVersion("3.2");
     	j1.setStudio("EA");
@@ -84,7 +86,7 @@ public class RestControllers {
     	j2.setName("Call of Duty: WWII");
     	j2.setMinAge(18);
     	j2.setDemo("4h7joJnMeb4");
-    	j2.setDescription("¿Estás preparado para tu temporada más importante hasta la fecha? Gracias al motor Frostbite, FIFA 18 hace que se confunda la línea que separa el mundo virtual del real, y consigue darle vida a los héroes, a los equipos y a las atmósferas que se viven en los partidos de verdad.");
+    	j2.setDescription("Call of Duty vuelve a sus raíces con WWII, el regreso de la serie de acción en primera persona a la Segunda Guerra Mundial. Desde las frías aguas de Normandía en el día D, avanzarás por todo el frente europeo enfrentándote al eje y defendiendo la libertad en un mundo al borde de la tiranía. Vive una historia de hermandad entre soldados en la mayor campaña ambientada en la Segunda Guerra Mundial, participa en algunas de las batallas más icónicas del conflicto en el brutal y realista modo multijugador en línea o coopera ante la amenaza de muertos vivientes en la historia independiente del nuevo modo zombies.");
     	j2.setNationality("USA");
     	j2.setStudio("Sledgehammer Games");
     	j2.setYear(2015);
@@ -404,6 +406,24 @@ public class RestControllers {
     	this.gRepository.save(j22);
     	this.gRepository.save(j23);
     	this.gRepository.save(j24);
+    	
+    	Partida p = new Partida();
+    	p.setGame(j1);
+    	p.setUser(u1);
+    	p.setDuration((long) 5);
+    	
+    	Partida p1 = new Partida();
+    	p1.setGame(j1);
+    	p1.setUser(u1);
+    	p1.setDuration((long) 3);
+    	
+    	Partida p2 = new Partida();
+    	p2.setGame(j1);
+    	p2.setUser(u1);
+    	p2.setDuration((long) 7);
+    	this.pRepository.save(p);
+    	this.pRepository.save(p1);
+    	this.pRepository.save(p2);
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -416,7 +436,6 @@ public class RestControllers {
     	ic.setDate(dateFormat.format(date));
     	ic.setTime(timeFormat.format(date));
     	ic.setIP(request.getRemoteAddr());
-    	System.out.println(user.getUsername());
     	
         Usuario u = this.uRepository.findByUsername(user.getUsername());
         
@@ -424,7 +443,7 @@ public class RestControllers {
         	 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
          }else {
         	 ic.setUser(u);
-        	 
+        	 u.getConnections().add(ic);
         	 if (u.getPassword().equals(user.getPassword()) && u.getBlocked()!=1) {
         		 ic.setResult(true);
         		 iRepository.save(ic);
@@ -532,5 +551,19 @@ public class RestControllers {
     	
     	gRepository.save(j);
     	return new ResponseEntity<>(j,HttpStatus.OK);
+    }
+    @RequestMapping(value = "/demo", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> demo(@RequestParam(value="userId", required=true)Long userId,@RequestParam(value="gameId",required = true) Long gameId) {
+    	Juego j = gRepository.findByIdGame(gameId);
+    	Usuario u = uRepository.findOne(userId);
+    	ArrayList<Partida> l = this.pRepository.findByUserAndGame(u, j);
+    	long tiempoAcumulado = 0;
+    	for (Partida p : l) {
+    		tiempoAcumulado += p.getDuration();
+    	}
+    	if(tiempoAcumulado>=this.timeLimit) {
+    		return new ResponseEntity<>(false,HttpStatus.UNAUTHORIZED);
+    	}
+    	return new ResponseEntity<>(true,HttpStatus.OK);
     }
 }

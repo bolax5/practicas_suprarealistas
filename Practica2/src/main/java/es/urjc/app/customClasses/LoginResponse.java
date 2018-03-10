@@ -1,4 +1,4 @@
-package es.urjc.app.responses;
+package es.urjc.app.customClasses;
 
 public class LoginResponse {
 	private long userId;
