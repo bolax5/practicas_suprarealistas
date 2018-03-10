@@ -5,6 +5,10 @@ export class Card {
   title: String;
   description: String;
   imgSource?: String;
+  studio?: String;
+  nationality?: String;
+  minAge?: number;
+  version?: String;
   videoSource?: SafeResourceUrl;
   playTime?: number;
   playability?: boolean;

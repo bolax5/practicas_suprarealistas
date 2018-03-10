@@ -20,8 +20,11 @@
       <div class="card text-center m-2" >
         <div class="card-block --blue">
           <img class="card-img-top pt-0" [src]="card.imgSource">
-          <h5 class="card-title mt-3">{{card.title | uppercase}}</h5>
-          <p class="card-text">{{card.description}}</p>
+          <span class="card-title pad" [ngClass] = "{'imgPegi18': card.minAge==18 , 'imgPegi16': card.minAge==16, 'imgPegi12': card.minAge==12, 'imgPegi7': card.minAge==7, 'imgPegi3':card.minAge==3}"></span>
+          <h5 class="card-title mt-3"><b>{{card.title | uppercase}}</b></h5>
+          <p class="card-title pad">{{card.studio}}</p>
+          <p class="card-title pad">{{card.nationality}}</p>
+          <p class="card-text ">{{card.description}}</p>
           <button (click)="heySoyUnBoton(content);showDisabled(t, i) " class="btn btn-primary" [disabled] = "!card.playability" ngbTooltip="Ya lo jugaste wey" triggers="manual" #t="ngbTooltip" (mouseleave)="t.close()">Probar</button>
           <ng-template #content>
               <div class="card-block" >

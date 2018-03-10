@@ -530,7 +530,6 @@ public class RestControllers {
     	String nationality = juego.getNationality();
     	String description = juego.getDescription();
     	String demo = juego.getDemo();
-    	System.out.println(juego.getStudio());
     	
     	if(name != null)
     		j.setName(name);

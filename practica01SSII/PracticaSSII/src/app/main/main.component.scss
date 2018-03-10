@@ -17,6 +17,7 @@
     border-color:white;
   }
   .btn{
+    margin-top: 4%;
     border-color:#007bff;
   }
   .btn-primary{
@@ -31,15 +32,22 @@
   .card-img-top{
     padding-top: 1em;
     width: 100%;
-    height: 30%;
+    height: 28%;
   }
   .card-block{
-    height: 500px;
+    height: 550px;
   }
   .card-title{
-    height: 10%;
+    height: 5%;
+    margin-bottom: 2px;
+  }
+  .pad{
+    padding:0;
+    margin-bottom : 0;
+    height : 5%
   }
   .card-text{
+    margin-bottom:8px;
     height: 40%;
     position: relative;
     overflow: hidden;
@@ -54,4 +62,56 @@
     pointer-events: none;
   }
 }
+  .imgPegi18 {
+    display:block;
+    min-height:5%;
+    max-width:10%;
+    background-image: url("../../assets/img/PEGI_18.png");
+    background-size:cover;
+    position:relative;
+    z-index:10;
+    margin-top:-11%
+  }
+  .imgPegi16 {
+    display:block;
+    min-height:5%;
+    max-width:10%;
+    background-image: url("../../assets/img/PEGI_16.png");
+    background-size:cover;
+    position:relative;
+    z-index:10;
+    margin-top:-11%
+  }
+  .imgPegi12 {
+    display:block;
+    min-height:5%;
+    max-width:10%;
+    background-image: url("../../assets/img/PEGI_12.png");
+    background-size:cover;
+    position:relative;
+    z-index:10;
+    margin-top:-11%
+  }
+  .imgPegi7 {
+    display:block;
+    min-height:5%;
+    max-width:10%;
+    background-image: url("../../assets/img/PEGI_7.png");
+    background-size:cover;
+    position:relative;
+    z-index:10;
+    margin-top:-11%
+  }
+  .imgPegi3 {
+    display:block;
+    min-height:5%;
+    max-width:10%;
+    background-image: url("../../assets/img/PEGI_3.png");
+    background-size:cover;
+    position:relative;
+    z-index:10;
+    margin-top:-11%
+  }
+
+
 }

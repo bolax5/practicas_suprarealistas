@@ -14,6 +14,9 @@ export class GameLoaderService {
       // tslint:disable-next-line:max-line-length
       description: 'Call of Duty vuelve a sus raíces con WWII, el regreso de la serie de acción en primera persona a la Segunda Guerra Mundial. Desde las frías aguas de Normandía en el día D, avanzarás por todo el frente europeo enfrentándote al eje y defendiendo la libertad en un mundo al borde de la tiranía. Vive una historia de hermandad entre soldados en la mayor campaña ambientada en la Segunda Guerra Mundial, participa en algunas de las batallas más icónicas del conflicto en el brutal y realista modo multijugador en línea o coopera ante la amenaza de muertos vivientes en la historia independiente del nuevo modo zombies.',
       imgSource: './assets/img/cod.jpg',
+      studio: 'Sledgehammer Games',
+      nationality: 'USA',
+      minAge: 18,
       videoSource: '4h7joJnMeb4',
       playability: true,
       playTime: 100
@@ -23,6 +26,9 @@ export class GameLoaderService {
       // tslint:disable-next-line:max-line-length
       description: '¿Estás preparado para tu temporada más importante hasta la fecha? Gracias al motor Frostbite, FIFA 18 hace que se confunda la línea que separa el mundo virtual del real, y consigue darle vida a los héroes, a los equipos y a las atmósferas que se viven en los partidos de verdad.',
       imgSource: './assets/img/fifa18.jpg',
+      studio: 'EA Sports',
+      nationality: 'Canada',
+      minAge: 3,
       videoSource: 'fFKGXz3k9VU',
       playability: true,
       playTime: 50
