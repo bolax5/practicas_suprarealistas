@@ -460,7 +460,7 @@ public class RestControllers {
         			 u.setBlocked(1);
         			 attempts=0;
         			 uRepository.save(u);
-        			 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        			 return new ResponseEntity<>(HttpStatus.LOCKED);
         		 }
         		 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         	 }

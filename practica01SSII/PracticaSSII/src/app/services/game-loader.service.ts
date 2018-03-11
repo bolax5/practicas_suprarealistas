@@ -75,6 +75,9 @@ export class GameLoaderService {
       description: 'The Binding of Isaac: Afterbirth+ es un juego de acción en vista cenital, con grandes dosis de elementos RPG y Rogue-like en el que los mundos se generan de manera aleatoria, dando lugar a probabilidades casi infinitas',
       imgSource: './assets/img/Isaac.jpg',
       videoSource: 'cvxVriP5Dvk',
+      nationality: 'USA',
+      minAge: 18,
+      studio: 'Pepito',
       playability: true,
       playTime: 10
     },
