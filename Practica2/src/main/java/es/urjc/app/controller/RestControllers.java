@@ -420,7 +420,7 @@ public class RestControllers {
     	Partida p2 = new Partida();
     	p2.setGame(j1);
     	p2.setUser(u1);
-    	p2.setDuration((long) 7);
+    	p2.setDuration((long) 6);
     	this.pRepository.save(p);
     	this.pRepository.save(p1);
     	this.pRepository.save(p2);
@@ -552,7 +552,7 @@ public class RestControllers {
     	return new ResponseEntity<>(j,HttpStatus.OK);
     }
     @RequestMapping(value = "/demo", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> demo(@RequestParam(value="userId", required=true)Long userId,@RequestParam(value="gameId",required = true) Long gameId) {
+    public ResponseEntity<DemoResponse> demo(@RequestParam(value="userId", required=true)Long userId,@RequestParam(value="gameId",required = true) Long gameId) {
     	Juego j = gRepository.findByIdGame(gameId);
     	Usuario u = uRepository.findOne(userId);
     	ArrayList<Partida> l = this.pRepository.findByUserAndGame(u, j);
@@ -560,9 +560,13 @@ public class RestControllers {
     	for (Partida p : l) {
     		tiempoAcumulado += p.getDuration();
     	}
+    	DemoResponse dr = new DemoResponse();
+    	dr.setIniTime(tiempoAcumulado);
     	if(tiempoAcumulado>=this.timeLimit) {
-    		return new ResponseEntity<>(false,HttpStatus.UNAUTHORIZED);
+    		dr.setPlayability(false);
+    		return new ResponseEntity<>(dr,HttpStatus.UNAUTHORIZED);
     	}
-    	return new ResponseEntity<>(true,HttpStatus.OK);
+    	dr.setPlayability(true);
+    	return new ResponseEntity<>(dr,HttpStatus.OK);
     }
 }
